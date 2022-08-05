@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useReducer } from "react";
 
-function App() {
+const initialState = 0;
+const reducer = (state, action) => {
+  if (action.type === "Increase") {
+    return state + 1;
+  } else {
+    return state - 1;
+  }
+  return state;
+};
+
+const App = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <p>{state}</p>
+      <button onClick={() => dispatch({ type: "Increase" })}>Increase</button>
+      <button onClick={() => dispatch({ type: "Decrease" })}>Decrease</button>
+    </>
   );
-}
-
+};
 export default App;
